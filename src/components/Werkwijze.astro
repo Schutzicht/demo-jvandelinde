@@ -1,0 +1,35 @@
+---
+import { werkwijze } from "../data/site";
+---
+
+<section id="werkwijze" class="ctx-light relative py-24 sm:py-32" style="background:var(--color-steen);">
+  <div class="container-edge">
+    <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+      <div class="reveal lg:sticky lg:top-28 lg:self-start">
+        <p class="eyebrow">Zo werken we</p>
+        <h2 class="display h-section mt-5">Van eerste schets<br />tot sleutel.</h2>
+        <p class="lede mt-5 max-w-md">
+          Bouwen schept verwachtingen. Daarom houden we het overzichtelijk: vier heldere
+          fases, met steeds één vast aanspreekpunt dat u door het hele traject loodst.
+        </p>
+        <a href="#contact" class="btn btn-navy mt-8">Plan een kennismaking</a>
+      </div>
+
+      <div class="flex flex-col">
+        {
+          werkwijze.map((step, i) => (
+            <div class={`reveal flex gap-6 py-7 ${i !== 0 ? "border-t border-[var(--border)]" : ""}`}>
+              <div class="display shrink-0 leading-none" style="font-size:clamp(2.2rem,4vw,3rem);font-weight:700;color:var(--color-geel-deep);">
+                {step.no}
+              </div>
+              <div class="pt-1">
+                <h3 class="h-card font-semibold">{step.title}</h3>
+                <p class="mt-2 text-[var(--fg-soft)]" style="line-height:1.65;">{step.text}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

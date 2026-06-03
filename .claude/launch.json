@@ -1,0 +1,12 @@
+{
+  "configurations": [
+    {
+      "name": "vandelinde",
+      "type": "node",
+      "request": "launch",
+      "command": "npm run dev",
+      "url": "http://localhost:4368",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}

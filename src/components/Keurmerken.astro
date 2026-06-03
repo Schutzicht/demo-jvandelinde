@@ -1,0 +1,25 @@
+---
+import { keurmerken } from "../data/site";
+---
+
+<section class="ctx-light relative border-y border-[var(--border)] py-14" style="background:var(--color-kalk);">
+  <div class="container-edge">
+    <div class="flex flex-col items-center gap-9 lg:flex-row lg:items-center lg:gap-12">
+      <div class="shrink-0 text-center lg:max-w-[15rem] lg:text-left reveal">
+        <p class="eyebrow eyebrow-center lg:justify-start">Erkend en gecertificeerd</p>
+        <p class="mt-3 text-sm leading-relaxed text-[var(--fg-soft)]">
+          Uw garantie op vakwerk, veiligheid en zekerheid, ook na de oplevering.
+        </p>
+      </div>
+      <div class="grid w-full grid-cols-3 items-center gap-3 sm:grid-cols-6 lg:gap-4 reveal">
+        {
+          keurmerken.map((k) => (
+            <div class="flex h-20 items-center justify-center rounded-xl border border-[var(--border)] bg-white px-4" title={k.name}>
+              <img src={k.file} alt={k.name} class="max-h-12 w-auto max-w-full object-contain" loading="lazy" />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

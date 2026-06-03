@@ -1,0 +1,41 @@
+---
+import { diensten } from "../data/site";
+
+const icons: Record<string, string> = {
+  restauratie: '<path d="M3 21h18M6 21V9l6-4 6 4v12M9 21v-5h6v5"/><path d="M10 12h4"/>',
+  woning: '<path d="M3 11.5 12 4l9 7.5M5 10v11h14V10"/><path d="M9.5 21v-6h5v6"/>',
+  utiliteit: '<path d="M3 21h18M5 21V5h9v16M14 21V9h5v12M8 9h2M8 13h2M8 17h2"/>',
+  winkel: '<path d="M4 9h16l-1-4H5L4 9Z"/><path d="M5 9v11h14V9M9 20v-5h6v5"/>',
+  comfort: '<path d="M12 21s-7-4.5-9-9a4.5 4.5 0 0 1 8-3 4.5 4.5 0 0 1 8 3c-2 4.5-7 9-7 9Z"/>',
+  duurzaam: '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 3 1.5 8-1 11.5A7 7 0 0 1 11 20Z"/><path d="M2 22c2-4 4-6 8-8"/>',
+  onderhoud: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.3 2.3-2-2 2.3-2.3Z"/>',
+  thuisfront: '<path d="M3 11.5 12 4l9 7.5M5 10v11h14V10"/><path d="M12 14a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"/>',
+};
+---
+
+<section id="diensten" class="ctx-light relative py-24 sm:py-32" style="background:var(--color-steen);">
+  <div class="container-edge">
+    <div class="max-w-2xl reveal">
+      <p class="eyebrow">Wat we doen</p>
+      <h2 class="display h-section mt-5">Eén bouwpartner,<br />voor elke opgave.</h2>
+      <p class="lede mt-5">
+        Of het nu gaat om een eeuwenoud monument of een nieuw bedrijfspand: we hebben de
+        vakmensen, de ervaring en de erkenningen in huis. Acht disciplines onder één dak.
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        diensten.map((d) => (
+          <article class="panel panel-hover reveal group flex flex-col p-7">
+            <div class="grid h-12 w-12 place-items-center rounded-xl transition-colors duration-500" style="background:rgba(251,204,26,0.16);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" set:html={icons[d.icon]} />
+            </div>
+            <h3 class="h-card mt-5 font-semibold">{d.title}</h3>
+            <p class="mt-2.5 text-sm leading-relaxed text-[var(--fg-soft)]">{d.blurb}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

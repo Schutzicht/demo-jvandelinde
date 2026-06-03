@@ -1,0 +1,130 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Bouwbedrijf Van de Linde · Bouwen en restaureren in Zeeland",
+  description = "Al ruim 70 jaar bouwt en restaureert Bouwbedrijf Van de Linde in heel Zeeland. Van monumentale restauratie tot nieuwbouwvilla's, utiliteitsbouw en verduurzaming. Familiebedrijf uit Goes.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>
+      document.documentElement.classList.add("has-js");
+    </script>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0a2342" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/og.jpg" />
+    <meta property="og:locale" content="nl_NL" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+
+    <!-- Reveal + count-up -->
+    <script>
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const reveals = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
+
+      if (reduce || !("IntersectionObserver" in window)) {
+        reveals.forEach((el) => el.classList.add("is-in"));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-in");
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+        );
+        reveals.forEach((el, i) => {
+          el.style.transitionDelay = `${Math.min(i % 6, 5) * 70}ms`;
+          io.observe(el);
+        });
+        setTimeout(() => reveals.forEach((el) => el.classList.add("is-in")), 2200);
+      }
+
+      const counters = document.querySelectorAll<HTMLElement>("[data-count]");
+      const animateCount = (el: HTMLElement) => {
+        const target = parseFloat(el.dataset.count || "0");
+        const suffix = el.dataset.suffix || "";
+        const start = performance.now();
+        const step = (now: number) => {
+          const p = Math.min((now - start) / 1500, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const val = target * eased;
+          el.textContent = (Number.isInteger(target) ? Math.round(val) : val.toFixed(1)) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      };
+      if ("IntersectionObserver" in window) {
+        const cio = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              animateCount(entry.target as HTMLElement);
+              cio.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.5 }
+        );
+        counters.forEach((c) => cio.observe(c));
+      }
+    </script>
+
+    <!-- Lenis smooth scroll -->
+    <script>
+      import Lenis from "lenis";
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduceMotion) {
+        const lenis = new Lenis({
+          duration: 1.1,
+          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+        });
+        function raf(time: number) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
+          a.addEventListener("click", (e) => {
+            const id = a.getAttribute("href");
+            if (!id || id === "#") return;
+            const el = document.querySelector(id);
+            if (el) {
+              e.preventDefault();
+              lenis.scrollTo(el as HTMLElement, { offset: -80 });
+            }
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

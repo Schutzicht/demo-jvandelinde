@@ -1,0 +1,68 @@
+---
+import { company, nav, diensten } from "../data/site";
+const year = 2026;
+---
+
+<footer class="ctx-dark relative overflow-hidden" style="background:#071c38;">
+  <div class="container-edge py-16 sm:py-20">
+    <div class="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.1fr]">
+      <div>
+        <img src="/brand/logo-hero.png" alt={company.name} class="h-10 w-auto" width="224" height="55" />
+        <p class="mt-5 max-w-xs text-sm leading-relaxed" style="color:rgba(244,241,232,0.62);">
+          Al ruim 70 jaar bouwen en restaureren in heel Zeeland. {company.promise}.
+        </p>
+        <p class="mt-5 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium" style="background:rgba(255,255,255,0.06);color:rgba(244,241,232,0.75);">
+          <span class="inline-block h-1.5 w-1.5 rounded-full" style="background:var(--color-geel);"></span>
+          Trotse sponsor van vv Kloetinge
+        </p>
+      </div>
+
+      <div>
+        <h4 class="footer-h">Diensten</h4>
+        <ul class="mt-4 space-y-2.5">
+          {diensten.slice(0, 6).map((d) => (
+            <li><a href="#diensten" class="footer-link">{d.title}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-h">Bedrijf</h4>
+        <ul class="mt-4 space-y-2.5">
+          {nav.map((n) => (
+            <li><a href={n.href} class="footer-link">{n.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-h">Contact</h4>
+        <ul class="mt-4 space-y-2.5 text-sm" style="color:rgba(244,241,232,0.7);">
+          <li>{company.street}</li>
+          <li>{company.postcode} {company.city}</li>
+          <li><a href={company.phoneHref} class="footer-link">{company.phone}</a></li>
+          <li><a href={`mailto:${company.email}`} class="footer-link">{company.email}</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-14 flex flex-col gap-4 border-t border-white/10 pt-7 text-sm sm:flex-row sm:items-center sm:justify-between" style="color:rgba(244,241,232,0.55);">
+      <p>© {year} {company.name}. Alle rechten voorbehouden.</p>
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
+        <a href="#" class="footer-link">Privacybeleid</a>
+        <a href="#" class="footer-link">Cookies</a>
+        <a href="#" class="footer-link">Disclaimer</a>
+        <span class="inline-flex items-center gap-1.5">
+          <span class="text-white/30">Demo door</span>
+          <span class="font-semibold text-white/80">Agensea</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .footer-h { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; color: var(--color-geel); }
+    .footer-link { color: rgba(244,241,232,0.7); transition: color 0.25s ease; }
+    .footer-link:hover { color: #fff; }
+  </style>
+</footer>
