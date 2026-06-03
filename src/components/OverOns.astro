@@ -1,63 +1,66 @@
 ---
 import { kernwaarden, company } from "../data/site";
+import SectionHead from "./SectionHead.astro";
 ---
 
-<section id="over-ons" class="ctx-dark relative overflow-hidden py-24 sm:py-32">
+<section id="over-ons" class="ctx-dark grain relative overflow-hidden py-24 sm:py-32">
   <div class="wash wash-navy" style="width:560px;height:560px;top:-180px;right:-160px;"></div>
 
   <div class="container-edge relative">
-    <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-      <div class="reveal">
-        <p class="eyebrow">Over ons</p>
-        <h2 class="display h-section mt-5 text-white">
-          Drie generaties<br />Zeeuws bouwvakmanschap.
-        </h2>
-        <p class="lede mt-6" style="color:rgba(244,241,232,0.84);">
+    <div class="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
+      <div>
+        <SectionHead index="05" label="Over ons" title="Drie generaties<br />Zeeuws vakmanschap." tone="dark" />
+        <p class="lede reveal mt-6" style="color:rgba(244,241,232,0.84);">
           Wat in 1953 begon als een echt Zeeuws aannemersbedrijf, is uitgegroeid tot een
           vertrouwde naam in de provincie. Met inmiddels circa 60 vakmensen, en nog altijd
           met de mentaliteit van een familiebedrijf: betrokken, eerlijk en trots op het werk.
         </p>
-        <p class="mt-4" style="color:rgba(244,241,232,0.7);line-height:1.7;">
-          We bouwen niet voor het moment, maar voor de generaties die na ons komen. Dat geldt
-          voor onze projecten, en net zo goed voor de mensen en relaties om ons heen.
-        </p>
 
-        <figure class="mt-8 border-l-2 pl-5" style="border-color:var(--color-geel);">
-          <blockquote class="display text-white" style="font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:500;line-height:1.3;">
-            "{company.motto}."
-          </blockquote>
-          <figcaption class="mt-2 text-sm text-[var(--fg-muted)]">Het motto van Van de Linde</figcaption>
+        <figure class="reveal mt-9 flex gap-5">
+          <svg width="26" height="22" viewBox="0 0 24 20" fill="none" stroke="#fbcc1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mt-2 shrink-0"><path d="M2 9 12 2l10 7"/><path d="M5 7v11h14V7" opacity="0.55"/></svg>
+          <div>
+            <blockquote class="display text-white" style="font-size:clamp(1.5rem,2.8vw,2.1rem);font-weight:500;line-height:1.22;letter-spacing:-0.02em;">
+              "{company.motto}."
+            </blockquote>
+            <figcaption class="label mt-3" style="color:rgba(244,241,232,0.55);">Het motto van Van de Linde</figcaption>
+          </div>
         </figure>
       </div>
 
       <div class="reveal relative">
-        <div class="overflow-hidden rounded-3xl" style="box-shadow:var(--shadow-card);">
-          <img
-            src="/img/about.jpg"
-            alt="Vakmanschap op de bouwplaats bij Van de Linde"
-            class="aspect-[4/5] w-full object-cover"
-            loading="lazy" width="900" height="1125"
-          />
+        <div class="plate" data-parallax="-0.04">
+          <div class="overflow-hidden rounded-[4px]" style="box-shadow:var(--shadow-card);">
+            <img
+              src="/img/about.jpg"
+              alt="Vakmanschap op de bouwplaats bij Van de Linde"
+              class="aspect-[4/5] w-full scale-[1.06] object-cover"
+              loading="lazy" width="900" height="1125"
+            />
+          </div>
         </div>
-        <div class="absolute -bottom-5 -left-5 rounded-2xl px-6 py-5 text-center sm:px-8" style="background:var(--color-geel);color:var(--color-navy-deep);box-shadow:0 20px 40px -16px rgba(0,0,0,0.5);">
-          <div class="display leading-none" style="font-size:clamp(2rem,4vw,2.8rem);font-weight:700;">{company.founded}</div>
-          <div class="mt-1 text-xs font-semibold uppercase tracking-wider">opgericht in Goes</div>
+        <div class="absolute -bottom-5 -left-5 rounded-[4px] px-6 py-5 text-center sm:px-8" style="background:var(--color-geel);color:var(--color-navy-deep);box-shadow:0 24px 48px -18px rgba(0,0,0,0.55);">
+          <div class="display leading-none" style="font-size:clamp(2rem,4vw,2.7rem);font-weight:700;">{company.founded}</div>
+          <div class="label mt-1.5" style="color:var(--color-navy-deep);opacity:0.7;">opgericht · Goes</div>
         </div>
+        <figcaption class="cap mt-7 block text-right" style="color:rgba(244,241,232,0.5);">Plaat 02 — Metselwerk, eigen ploeg</figcaption>
       </div>
     </div>
 
-    <!-- Kernwaarden -->
+    <!-- Kernwaarden als index-lijst -->
     <div class="mt-20 sm:mt-24">
-      <p class="eyebrow reveal">Waar we voor staan</p>
-      <div class="mt-8 grid gap-x-8 gap-y-9 sm:grid-cols-2 lg:grid-cols-5">
+      <div class="reveal flex items-center gap-3">
+        <span class="ix">06</span>
+        <span class="label" style="color:rgba(244,241,232,0.55);">— Waar we voor staan</span>
+      </div>
+      <div class="mt-8 grid border-t border-white/12 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-14">
         {
-          kernwaarden.map((k) => (
-            <div class="reveal">
-              <div class="flex items-center gap-2.5">
-                <span class="inline-block h-2 w-2 rounded-full" style="background:var(--color-geel);"></span>
-                <h3 class="text-lg font-semibold text-white" style="font-family:var(--font-display);">{k.title}</h3>
+          kernwaarden.map((k, i) => (
+            <div class="reveal flex gap-5 border-b border-white/12 py-6">
+              <span class="ix shrink-0 pt-1">{`0${i + 1}`}</span>
+              <div>
+                <h3 class="text-lg font-semibold text-white serif">{k.title}</h3>
+                <p class="mt-1.5 text-sm leading-relaxed" style="color:rgba(244,241,232,0.64);">{k.text}</p>
               </div>
-              <p class="mt-2 text-sm leading-relaxed" style="color:rgba(244,241,232,0.66);">{k.text}</p>
             </div>
           ))
         }

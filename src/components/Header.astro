@@ -18,7 +18,7 @@ import { company, nav } from "../data/site";
       <nav class="hidden items-center gap-0.5 lg:flex">
         {
           nav.map((item) => (
-            <a href={item.href} class="nav-link rounded-full px-3.5 py-2 text-sm font-medium transition-colors duration-300">
+            <a href={item.href} class="nav-link link-sweep px-3.5 py-2 text-sm font-medium transition-colors duration-300">
               {item.label}
             </a>
           ))
@@ -29,7 +29,7 @@ import { company, nav } from "../data/site";
         <a href={company.phoneHref} class="hdr-phone hidden text-sm font-semibold transition-colors xl:block">
           {company.phone}
         </a>
-        <a href="#contact" class="hdr-cta inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300">
+        <a href="#contact" class="hdr-cta btn-mag inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300">
           Offerte aanvragen
         </a>
         <button id="menu-toggle" class="menu-btn grid h-10 w-10 place-items-center rounded-full border transition-colors lg:hidden" aria-label="Menu openen" aria-expanded="false">

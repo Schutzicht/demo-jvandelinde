@@ -35,17 +35,33 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
+    <div id="scroll-progress"></div>
+
+    <!-- Preloader: gevel-lijn tekent zich, naam rijst op -->
+    <div id="preloader" aria-hidden="true">
+      <div class="flex flex-col items-center gap-5">
+        <svg class="pl-mark" viewBox="0 0 64 52" fill="none" stroke="#fbcc1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" pathLength="1">
+          <path d="M4 26 32 4l28 22" />
+          <path d="M12 22v26h40V22" />
+          <path d="M26 48V34h12v14" />
+        </svg>
+        <div class="pl-word" style="line-height:1;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.4em;text-transform:uppercase;color:rgba(244,241,232,0.7);">Van de Linde</span>
+        </div>
+      </div>
+    </div>
+
     <slot />
 
-    <!-- Reveal + count-up -->
+    <!-- Reveal, masked lines + count-up -->
     <script>
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const reveals = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
+      const reveals = Array.from(document.querySelectorAll<HTMLElement>(".reveal, .mask-line"));
 
       if (reduce || !("IntersectionObserver" in window)) {
         reveals.forEach((el) => el.classList.add("is-in"));
@@ -65,7 +81,7 @@ const {
           el.style.transitionDelay = `${Math.min(i % 6, 5) * 70}ms`;
           io.observe(el);
         });
-        setTimeout(() => reveals.forEach((el) => el.classList.add("is-in")), 2200);
+        setTimeout(() => reveals.forEach((el) => el.classList.add("is-in")), 2400);
       }
 
       const counters = document.querySelectorAll<HTMLElement>("[data-count]");
@@ -74,7 +90,7 @@ const {
         const suffix = el.dataset.suffix || "";
         const start = performance.now();
         const step = (now: number) => {
-          const p = Math.min((now - start) / 1500, 1);
+          const p = Math.min((now - start) / 1700, 1);
           const eased = 1 - Math.pow(1 - p, 3);
           const val = target * eased;
           el.textContent = (Number.isInteger(target) ? Math.round(val) : val.toFixed(1)) + suffix;
@@ -91,9 +107,65 @@ const {
               cio.unobserve(entry.target);
             });
           },
-          { threshold: 0.5 }
+          { threshold: 0.6 }
         );
         counters.forEach((c) => cio.observe(c));
+      }
+    </script>
+
+    <!-- Scroll-progress, parallax, magnetic, preloader -->
+    <script>
+      const reduceM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Preloader weghalen + hero-tekst laten oprijzen
+      const pl = document.getElementById("preloader");
+      const goHero = () => document.querySelectorAll(".js-hero").forEach((e) => e.classList.add("hero-go"));
+      const hidePl = () => { pl?.classList.add("done"); goHero(); };
+      if (reduceM) hidePl();
+      else { window.addEventListener("load", () => setTimeout(hidePl, 1350)); setTimeout(hidePl, 2600); }
+
+      // Scroll-progress
+      const bar = document.getElementById("scroll-progress");
+      const onScrollBar = () => {
+        const h = document.documentElement;
+        const max = h.scrollHeight - h.clientHeight;
+        const p = max > 0 ? h.scrollTop / max : 0;
+        if (bar) bar.style.transform = `scaleX(${p})`;
+      };
+      onScrollBar();
+      window.addEventListener("scroll", onScrollBar, { passive: true });
+
+      if (!reduceM) {
+        // Parallax op [data-parallax] (snelheid via data-parallax)
+        const px = Array.from(document.querySelectorAll<HTMLElement>("[data-parallax]"));
+        let ticking = false;
+        const applyPx = () => {
+          const vh = window.innerHeight;
+          px.forEach((el) => {
+            const r = el.getBoundingClientRect();
+            const speed = parseFloat(el.dataset.parallax || "0.12");
+            const center = r.top + r.height / 2 - vh / 2;
+            el.style.transform = `translate3d(0, ${(-center * speed).toFixed(1)}px, 0)`;
+          });
+          ticking = false;
+        };
+        const reqPx = () => { if (!ticking) { ticking = true; requestAnimationFrame(applyPx); } };
+        if (px.length) { applyPx(); window.addEventListener("scroll", reqPx, { passive: true }); window.addEventListener("resize", reqPx); }
+
+        // Magnetische knoppen
+        const isFine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+        if (isFine) {
+          document.querySelectorAll<HTMLElement>(".btn-mag").forEach((el) => {
+            const strength = 0.3;
+            el.addEventListener("mousemove", (e) => {
+              const r = el.getBoundingClientRect();
+              const mx = e.clientX - r.left - r.width / 2;
+              const my = e.clientY - r.top - r.height / 2;
+              el.style.transform = `translate(${mx * strength}px, ${my * strength}px)`;
+            });
+            el.addEventListener("mouseleave", () => { el.style.transform = "translate(0,0)"; });
+          });
+        }
       }
     </script>
 
@@ -103,7 +175,7 @@ const {
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (!reduceMotion) {
         const lenis = new Lenis({
-          duration: 1.1,
+          duration: 1.15,
           easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           smoothWheel: true,
         });

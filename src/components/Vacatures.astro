@@ -1,46 +1,46 @@
 ---
 import { vacatures } from "../data/site";
+import SectionHead from "./SectionHead.astro";
 ---
 
 <section id="vacatures" class="ctx-light relative py-24 sm:py-32">
   <div class="container-edge">
-    <div class="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
-      <div class="reveal">
-        <p class="eyebrow">Werken bij Van de Linde</p>
-        <h2 class="display h-section mt-5">Bouw mee aan<br />de toekomst.</h2>
-        <p class="lede mt-5 max-w-md">
+    <div class="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
+      <div>
+        <SectionHead index="07" label="Werken bij Van de Linde" title="Bouw mee aan<br />de toekomst." />
+        <p class="lede reveal mt-5 max-w-md">
           Een hecht team, mooie projecten door heel Zeeland en korte lijnen. We zijn een
           erkend leerbedrijf en investeren graag in vakmensen, van leerling tot ervaren kracht.
         </p>
-        <div class="mt-7 flex flex-wrap gap-2.5">
+        <div class="reveal mt-7 flex flex-wrap gap-2">
           {["Vast contract", "Eigen materieel", "Erkend leerbedrijf", "Werk dichtbij huis"].map((t) => (
-            <span class="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3.5 py-1.5 text-sm font-medium text-[var(--fg-soft)]">{t}</span>
+            <span class="mono rounded-full border border-[var(--border)] px-3.5 py-1.5 text-[0.78rem] text-[var(--fg-soft)]">{t}</span>
           ))}
         </div>
       </div>
 
       <div class="reveal">
-        <div class="overflow-hidden rounded-2xl border border-[var(--border)]">
+        <div class="border-t border-[var(--line)]">
           {
             vacatures.map((v, i) => (
-              <a
-                href={v.href}
-                class={`group flex items-center justify-between gap-4 bg-[var(--surface)] px-6 py-5 transition-colors duration-300 hover:bg-[var(--surface-2)] ${i !== 0 ? "border-t border-[var(--border)]" : ""}`}
-              >
-                <div>
-                  <h3 class="text-lg font-semibold text-[var(--fg)]" style="font-family:var(--font-display);">{v.title}</h3>
-                  <p class="text-sm text-[var(--fg-muted)]">{v.type} · {`Goes e.o.`}</p>
+              <a href={v.href} class="vac group flex items-center justify-between gap-4 border-b border-[var(--line)] py-6 transition-colors duration-300">
+                <div class="flex items-baseline gap-5">
+                  <span class="ix">{`0${i + 1}`}</span>
+                  <div>
+                    <h3 class="serif text-xl font-semibold text-[var(--fg)] transition-colors duration-300 group-hover:text-[var(--color-navy)]">{v.title}</h3>
+                    <p class="label mt-1">{v.type} · Goes e.o.</p>
+                  </div>
                 </div>
-                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[var(--border)] text-[var(--color-navy)] transition-all duration-300 group-hover:bg-[var(--color-navy)] group-hover:text-white">
+                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-[var(--border)] text-[var(--color-navy)] transition-all duration-300 group-hover:translate-x-1 group-hover:bg-[var(--color-navy)] group-hover:text-white">
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
                 </span>
               </a>
             ))
           }
         </div>
-        <p class="mt-4 text-sm text-[var(--fg-muted)]">
+        <p class="mt-5 text-sm text-[var(--fg-muted)]">
           Geen passende vacature? Een open sollicitatie is altijd welkom via
-          <a href="#contact" class="font-semibold text-[var(--color-navy)] underline-offset-2 hover:underline">ons contactformulier</a>.
+          <a href="#contact" class="link-sweep font-semibold text-[var(--color-navy)]">ons contactformulier</a>.
         </p>
       </div>
     </div>

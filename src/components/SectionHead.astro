@@ -1,0 +1,24 @@
+---
+interface Props {
+  index: string;
+  label: string;
+  title: string;
+  align?: "left" | "center";
+  tone?: "light" | "dark";
+}
+const { index, label, title, align = "left", tone = "light" } = Astro.props;
+const stroke = tone === "dark" ? "#fbcc1a" : "#003c78";
+---
+
+<div class={`reveal ${align === "center" ? "mx-auto text-center" : ""}`}>
+  <div class={`flex items-center gap-3 ${align === "center" ? "justify-center" : ""}`}>
+    <svg width="20" height="17" viewBox="0 0 24 20" fill="none" stroke={stroke} stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M2 9 12 2l10 7" />
+      <path d="M5 7v11h14V7" opacity="0.55" />
+    </svg>
+    <span class="ix">{index}</span>
+    <span class="label">— {label}</span>
+  </div>
+  <h2 class="display h-section mt-5" set:html={title}></h2>
+  <slot />
+</div>

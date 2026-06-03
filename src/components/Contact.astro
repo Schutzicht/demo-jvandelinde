@@ -11,77 +11,75 @@ const projectTypes = [
 ];
 ---
 
-<section id="contact" class="ctx-dark relative overflow-hidden py-24 sm:py-32">
+<section id="contact" class="ctx-dark grain relative overflow-hidden py-24 sm:py-32">
   <div class="wash wash-geel" style="width:480px;height:480px;bottom:-200px;left:-120px;opacity:0.16;"></div>
 
   <div class="container-edge relative">
-    <div class="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-      <!-- Linkerkant: uitnodiging + gegevens -->
-      <div class="reveal">
-        <p class="eyebrow">Contact</p>
-        <h2 class="display h-section mt-5 text-white">Klaar om te<br />bouwen?</h2>
-        <p class="lede mt-6 max-w-md" style="color:rgba(244,241,232,0.84);">
+    <div class="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+      <div>
+        <div class="reveal flex items-center gap-3">
+          <svg width="20" height="17" viewBox="0 0 24 20" fill="none" stroke="#fbcc1a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9 12 2l10 7"/><path d="M5 7v11h14V7" opacity="0.55"/></svg>
+          <span class="ix">08</span>
+          <span class="label" style="color:rgba(244,241,232,0.55);">— Contact</span>
+        </div>
+        <h2 class="display h-section reveal mt-5 text-white">Klaar om te<br />bouwen?</h2>
+        <p class="lede reveal mt-6 max-w-md" style="color:rgba(244,241,232,0.84);">
           Loop eens binnen, bel ons of vraag vrijblijvend een offerte aan. We denken graag
           met u mee, of het nu om een grote verbouwing of een klus aan huis gaat.
         </p>
 
-        <div class="mt-9 space-y-1">
+        <div class="reveal mt-9 space-y-1">
           <a href={company.phoneHref} class="contact-row group">
             <span class="contact-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></span>
-            <span><span class="contact-label">Bel ons</span><span class="contact-val">{company.phone}</span></span>
+            <span><span class="contact-label label">Bel ons</span><span class="contact-val">{company.phone}</span></span>
           </a>
           <a href={`mailto:${company.email}`} class="contact-row group">
             <span class="contact-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></span>
-            <span><span class="contact-label">Mail ons</span><span class="contact-val">{company.email}</span></span>
+            <span><span class="contact-label label">Mail ons</span><span class="contact-val">{company.email}</span></span>
           </a>
           <div class="contact-row">
             <span class="contact-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.7-7-11a7 7 0 1 1 14 0c0 5.3-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
-            <span><span class="contact-label">Kom langs</span><span class="contact-val">{company.street}, {company.postcode} {company.city}</span></span>
+            <span><span class="contact-label label">Kom langs</span><span class="contact-val">{company.street}, {company.postcode} {company.city}</span></span>
           </div>
           <div class="contact-row">
             <span class="contact-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-            <span><span class="contact-label">Openingstijden</span><span class="contact-val">Ma t/m vr · 07:00 - 17:00</span></span>
+            <span><span class="contact-label label">Openingstijden</span><span class="contact-val">Ma t/m vr · 07:00 - 17:00</span></span>
           </div>
         </div>
       </div>
 
-      <!-- Rechterkant: offerteformulier -->
       <div class="reveal">
-        <form id="offerte-form" class="rounded-3xl bg-white p-7 sm:p-9" style="box-shadow:var(--shadow-card);">
-          <h3 class="text-xl font-semibold text-[#142033]" style="font-family:var(--font-display);">Vraag een offerte aan</h3>
-          <p class="mt-1 text-sm text-[#6c7689]">We reageren doorgaans binnen één werkdag.</p>
+        <form id="offerte-form" class="rounded-[6px] bg-[var(--surface,#fbf9f4)] p-7 sm:p-9" style="background:#fbf9f4;box-shadow:var(--shadow-card);">
+          <h3 class="serif text-2xl font-semibold text-[#14202f]">Vraag een offerte aan</h3>
+          <p class="mt-1 text-sm text-[#6a7488]">We reageren doorgaans binnen één werkdag.</p>
 
           <div class="mt-6 grid gap-4 sm:grid-cols-2">
             <label class="form-field">
-              <span>Naam</span>
+              <span class="label">Naam</span>
               <input type="text" name="naam" required placeholder="Uw naam" />
             </label>
             <label class="form-field">
-              <span>Telefoon</span>
+              <span class="label">Telefoon</span>
               <input type="tel" name="telefoon" placeholder="06 -" />
             </label>
           </div>
           <label class="form-field mt-4 block">
-            <span>E-mailadres</span>
+            <span class="label">E-mailadres</span>
             <input type="email" name="email" required placeholder="naam@voorbeeld.nl" />
           </label>
           <label class="form-field mt-4 block">
-            <span>Type project</span>
-            <select name="type">
-              {projectTypes.map((t) => <option>{t}</option>)}
-            </select>
+            <span class="label">Type project</span>
+            <select name="type">{projectTypes.map((t) => <option>{t}</option>)}</select>
           </label>
           <label class="form-field mt-4 block">
-            <span>Uw plan</span>
+            <span class="label">Uw plan</span>
             <textarea name="bericht" rows="4" placeholder="Vertel kort wat u voor ogen heeft..."></textarea>
           </label>
 
-          <button type="submit" class="btn btn-navy mt-6 w-full">Verstuur aanvraag</button>
-          <p class="mt-3 text-center text-xs text-[#6c7689]">
-            Demo-formulier, er wordt niets verzonden.
-          </p>
+          <button type="submit" class="btn btn-navy btn-mag mt-6 w-full">Verstuur aanvraag</button>
+          <p class="mt-3 text-center text-xs text-[#6a7488]">Demo-formulier, er wordt niets verzonden.</p>
 
-          <div id="form-success" class="mt-4 hidden items-center gap-2 rounded-xl px-4 py-3 text-sm font-medium" style="background:rgba(34,160,90,0.12);color:#1c7d45;">
+          <div id="form-success" class="mt-4 hidden items-center gap-2 rounded-[6px] px-4 py-3 text-sm font-medium" style="background:rgba(34,160,90,0.12);color:#1c7d45;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
             Bedankt. In de echte site komt uw aanvraag direct bij ons binnen.
           </div>
@@ -92,28 +90,20 @@ const projectTypes = [
 </section>
 
 <style>
-  .contact-row { display: flex; align-items: center; gap: 1rem; border-radius: 16px; padding: 0.85rem 0.5rem; transition: background 0.3s ease; }
+  .contact-row { display: flex; align-items: center; gap: 1rem; border-radius: 12px; padding: 0.8rem 0.5rem; transition: background 0.3s ease; }
   a.contact-row:hover { background: rgba(255,255,255,0.05); }
-  .contact-ico { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; background: rgba(251,204,26,0.14); color: var(--color-geel); }
-  .contact-label { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--fg-muted); }
+  .contact-ico { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; border-radius: 10px; background: rgba(251,204,26,0.14); color: var(--color-geel); }
+  .contact-label { display: block; color: var(--fg-muted); margin-bottom: 1px; }
   .contact-val { display: block; font-weight: 600; color: #fff; }
 
-  .form-field span { display: block; font-size: 0.8rem; font-weight: 600; color: #404c61; margin-bottom: 0.4rem; }
+  .form-field span.label { display: block; color: #3c485b; margin-bottom: 0.4rem; }
   .form-field input, .form-field select, .form-field textarea {
-    width: 100%;
-    border: 1.5px solid #e2dac9;
-    background: #faf8f3;
-    border-radius: 12px;
-    padding: 0.7rem 0.9rem;
-    font-size: 0.95rem;
-    color: #142033;
-    font-family: var(--font-sans);
+    width: 100%; border: 1.5px solid #ddd4c2; background: #f4f0e7; border-radius: 8px;
+    padding: 0.7rem 0.9rem; font-size: 0.95rem; color: #14202f; font-family: var(--font-sans);
     transition: border-color 0.25s ease, box-shadow 0.25s ease;
   }
   .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
-    outline: none;
-    border-color: var(--color-navy);
-    box-shadow: 0 0 0 3px rgba(0,60,120,0.12);
+    outline: none; border-color: var(--color-navy); box-shadow: 0 0 0 3px rgba(0,60,120,0.12);
   }
   .form-field textarea { resize: vertical; }
 </style>
@@ -123,10 +113,7 @@ const projectTypes = [
   const success = document.getElementById("form-success");
   form?.addEventListener("submit", (e) => {
     e.preventDefault();
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
+    if (!form.checkValidity()) { form.reportValidity(); return; }
     success?.classList.remove("hidden");
     success?.classList.add("flex");
     form.querySelectorAll("input, select, textarea").forEach((el) => ((el as HTMLInputElement).disabled = true));

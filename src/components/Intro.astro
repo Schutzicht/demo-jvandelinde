@@ -2,16 +2,21 @@
 import { stats, company } from "../data/site";
 ---
 
-<section id="bedrijf" class="ctx-light relative py-24 sm:py-32">
+<section id="bedrijf" class="ctx-light relative overflow-hidden py-24 sm:py-32">
   <div class="container-edge">
-    <div class="grid items-end gap-12 lg:grid-cols-2 lg:gap-16">
-      <div>
-        <p class="eyebrow reveal">Het familiebedrijf</p>
-        <h2 class="display h-section mt-5 reveal">
+    <div class="grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-20">
+      <div class="reveal">
+        <div class="flex items-center gap-3">
+          <svg width="20" height="17" viewBox="0 0 24 20" fill="none" stroke="#003c78" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9 12 2l10 7"/><path d="M5 7v11h14V7" opacity="0.55"/></svg>
+          <span class="ix">01</span>
+          <span class="label">— Het familiebedrijf</span>
+        </div>
+        <h2 class="display mt-6" style="font-size:clamp(2.4rem,6vw,5rem);line-height:0.98;">
           Niet de grootste.<br /><span class="text-navy">Wel de beste.</span>
         </h2>
       </div>
-      <div class="reveal">
+
+      <div class="reveal lg:pb-2">
         <p class="lede">
           Bouwbedrijf Van de Linde is een echt Zeeuws familiebedrijf. Met circa 60
           vakmensen zijn we groot genoeg voor het serieuze werk en klein genoeg om u
@@ -19,25 +24,28 @@ import { stats, company } from "../data/site";
           aanspreekpunt van offerte tot oplevering.
         </p>
         <p class="mt-4 text-[var(--fg-soft)]" style="line-height:1.7;">
-          Al ruim 70 jaar bouwen en restaureren we in heel Zeeland. Van rijksmonument tot
-          nieuwbouwvilla, altijd met hetzelfde uitgangspunt:
+          Al ruim 70 jaar bouwen en restaureren we in heel Zeeland, van rijksmonument tot
+          nieuwbouwvilla. Altijd met hetzelfde uitgangspunt:
           <span class="font-semibold text-[var(--fg)]">"{company.motto}."</span>
         </p>
       </div>
     </div>
 
-    <!-- Cijfers -->
-    <div class="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--border)] sm:mt-20 lg:grid-cols-4">
-      {
-        stats.map((s) => (
-          <div class="reveal bg-[var(--surface)] px-6 py-9 text-center sm:px-8 sm:py-11">
-            <div class="display tnum text-[var(--color-navy)]" style="font-size:clamp(2.6rem,5vw,3.6rem);font-weight:700;">
-              <span data-count={s.value} data-suffix={s.suffix}>0{s.suffix}</span>
+    <!-- Cijfers als editoriale band -->
+    <div class="reveal mt-16 border-t border-[var(--line)] sm:mt-20">
+      <div class="grid grid-cols-2 lg:grid-cols-4">
+        {
+          stats.map((s, i) => (
+            <div class="border-b border-[var(--line)] py-8 lg:border-b-0 lg:border-l lg:border-[var(--line)] lg:px-9 lg:first:border-l-0 lg:first:pl-0">
+              <span class="label label-accent">{`0${i + 1}`}</span>
+              <div class="display tnum mt-3 text-[var(--color-navy)]" style="font-size:clamp(2.8rem,5.5vw,4rem);font-weight:600;line-height:1;">
+                <span data-count={s.value} data-suffix={s.suffix}>0{s.suffix}</span>
+              </div>
+              <div class="mt-2 max-w-[12rem] text-sm leading-snug text-[var(--fg-muted)]">{s.label}</div>
             </div>
-            <div class="mt-2 text-sm font-medium text-[var(--fg-muted)]">{s.label}</div>
-          </div>
-        ))
-      }
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
